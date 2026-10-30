@@ -3,30 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LUMEN | Video Connect</title>
+  <title>LUMEN | Instant Video Connect</title>
   
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Firebase Compat SDKs -->
+  <!-- Firebase Scripts (Compat) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
   <style>
     :root {
-      --bg-dark: #07090e;
-      --card-bg: rgba(18, 22, 34, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --neon-cyan: #00f2fe;
-      --neon-blue: #4facfe;
-      --neon-purple: #7928ca;
+      --bg: #07090e;
+      --card: rgba(18, 22, 34, 0.75);
+      --border: rgba(255, 255, 255, 0.08);
+      --cyan: #00f2fe;
+      --blue: #4facfe;
+      --purple: #7928ca;
       --danger: #ef4444;
       --success: #10b981;
-      --text-main: #f8fafc;
+      --text: #f8fafc;
       --text-sub: #94a3b8;
     }
 
@@ -39,11 +38,11 @@
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--bg);
       background-image: 
-        radial-gradient(at 0% 0%, rgba(121, 40, 202, 0.18) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 242, 254, 0.12) 0px, transparent 50%);
-      color: var(--text-main);
+        radial-gradient(at 0% 0%, rgba(121, 40, 202, 0.2) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 242, 254, 0.15) 0px, transparent 50%);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -56,7 +55,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--border);
       background: rgba(7, 9, 14, 0.85);
       backdrop-filter: blur(15px);
       z-index: 50;
@@ -68,7 +67,7 @@
       gap: 10px;
       font-weight: 700;
       font-size: 1.25rem;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -124,7 +123,7 @@
     .video-card {
       position: relative;
       background: #000;
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border);
       border-radius: 20px;
       overflow: hidden;
       display: flex;
@@ -133,7 +132,7 @@
     }
 
     .video-card.remote {
-      border: 1px solid rgba(0, 242, 254, 0.25);
+      border: 1px solid rgba(0, 242, 254, 0.3);
     }
 
     video {
@@ -180,7 +179,7 @@
       height: 60px;
       border-radius: 50%;
       background: rgba(0, 242, 254, 0.15);
-      border: 2px solid var(--neon-cyan);
+      border: 2px solid var(--cyan);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -195,8 +194,8 @@
 
     .controls-panel {
       height: 75px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 18px;
       display: flex;
       align-items: center;
@@ -228,8 +227,12 @@
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-main);
+      color: var(--text);
       font-size: 1rem;
+    }
+
+    .btn-icon:hover {
+      background: rgba(255, 255, 255, 0.15);
     }
 
     .btn-icon.off {
@@ -242,7 +245,7 @@
       height: 48px;
       padding: 0 28px;
       border-radius: 14px;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
       color: #000;
       font-size: 0.95rem;
       letter-spacing: 0.5px;
@@ -256,8 +259,8 @@
     }
 
     .chat-panel {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 20px;
       display: flex;
       flex-direction: column;
@@ -268,7 +271,7 @@
 
     .chat-header {
       padding: 16px;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -296,7 +299,7 @@
 
     .msg-bubble.me {
       align-self: flex-end;
-      background: linear-gradient(135deg, var(--neon-purple), #4f46e5);
+      background: linear-gradient(135deg, var(--purple), #4f46e5);
       color: #fff;
     }
 
@@ -309,7 +312,7 @@
     .chat-footer {
       padding: 12px;
       background: rgba(0, 0, 0, 0.25);
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid var(--border);
       display: flex;
     }
 
@@ -318,7 +321,7 @@
       align-items: center;
       gap: 8px;
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border);
       padding: 6px 12px;
       border-radius: 12px;
       width: 100%;
@@ -336,7 +339,7 @@
     .chat-box button {
       background: transparent;
       border: none;
-      color: var(--neon-cyan);
+      color: var(--cyan);
       cursor: pointer;
     }
 
@@ -354,11 +357,11 @@
 
   <header>
     <div class="brand">
-      <i class="fa-solid fa-bolt" style="color: var(--neon-cyan);"></i>
+      <i class="fa-solid fa-bolt" style="color: var(--cyan);"></i>
       <span>LUMEN TV</span>
     </div>
     <div class="badge-online">
-      <span id="statOnlineCount">0</span> Online
+      <span id="statOnlineCount">1</span> Online
     </div>
   </header>
 
@@ -366,7 +369,7 @@
     <section class="video-deck">
       <div class="videos-wrapper">
         
-        <!-- Local Video -->
+        <!-- Local Stream -->
         <div class="video-card local">
           <video id="localVideo" autoplay playsinline muted></video>
           <div class="user-tag">
@@ -374,7 +377,7 @@
           </div>
         </div>
 
-        <!-- Remote Video -->
+        <!-- Remote Stream -->
         <div class="video-card remote">
           <video id="remoteVideo" autoplay playsinline></video>
           <div class="user-tag" id="partnerTag" style="display: none;">
@@ -383,18 +386,18 @@
           
           <div class="screen-loader" id="radarLoader">
             <div class="radar-pulse">
-              <i class="fa-solid fa-video" style="color: var(--neon-cyan); font-size: 1.3rem;"></i>
+              <i class="fa-solid fa-video" style="color: var(--cyan); font-size: 1.3rem;"></i>
             </div>
-            <p id="loaderMessage">Click START to connect with someone</p>
+            <p id="loaderMessage">Click START on BOTH devices to match</p>
           </div>
         </div>
 
       </div>
 
-      <!-- Controls -->
+      <!-- Video Actions Hub -->
       <div class="controls-panel">
         <div class="ctrl-group">
-          <button class="btn btn-icon" id="micBtn" title="Mute/Unmute Mic"><i class="fa-solid fa-microphone"></i></button>
+          <button class="btn btn-icon" id="micBtn" title="Mic On/Off"><i class="fa-solid fa-microphone"></i></button>
           <button class="btn btn-icon" id="camBtn" title="Cam On/Off"><i class="fa-solid fa-video"></i></button>
           <button class="btn btn-icon" id="switchCamBtn" title="Flip Camera"><i class="fa-solid fa-camera-rotate"></i></button>
         </div>
@@ -415,13 +418,13 @@
     <!-- Side Chat -->
     <aside class="chat-panel">
       <div class="chat-header">
-        <span>Live Chat</span>
+        <span>Live Conversation</span>
         <span style="font-size:0.75rem; color:var(--text-sub);" id="partnerStatusLabel">Standby</span>
       </div>
 
       <div class="chat-messages" id="chatList">
         <div class="msg-bubble them">
-          👋 Press START to connect peer-to-peer!
+          ⚡ System ready. Click START to begin matchmaking.
         </div>
       </div>
 
@@ -450,14 +453,12 @@
     const auth = firebase.auth();
     const db = firebase.database();
 
-    // High performance STUN configurations for cross-network (NAT/Firewall traversal)
+    // High quality STUN configuration
     const rtcConfig = {
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" },
         { urls: "stun:stun1.l.google.com:19302" },
         { urls: "stun:stun2.l.google.com:19302" },
-        { urls: "stun:stun3.l.google.com:19302" },
-        { urls: "stun:stun4.l.google.com:19302" },
         { urls: "stun:global.stun.twilio.com:3478" }
       ],
       iceCandidatePoolSize: 10
@@ -471,9 +472,8 @@
     let currentPartnerId = null;
     let isCaller = false;
     let facingMode = "user";
-
-    // Candidate queues to avoid race condition drops
-    let pendingRemoteCandidates = [];
+    let pendingIceCandidates = [];
+    let isMatching = false;
 
     const localVideo = document.getElementById('localVideo');
     const remoteVideo = document.getElementById('remoteVideo');
@@ -486,29 +486,29 @@
     const chatList = document.getElementById('chatList');
     const chatInput = document.getElementById('chatInput');
 
-    // 1. Authenticate user
+    // 1. Initial Authentication
     auth.signInAnonymously().then(res => {
       myUserId = res.user.uid;
       
-      const userStatusRef = db.ref(`users/${myUserId}`);
+      const userRef = db.ref(`users/${myUserId}`);
       db.ref(".info/connected").on("value", snap => {
         if (snap.val() === true) {
-          userStatusRef.onDisconnect().remove();
-          userStatusRef.set({ online: true, ts: Date.now() });
+          userRef.onDisconnect().remove();
+          userRef.set({ online: true, ts: Date.now() });
         }
       });
 
       db.ref('users').on('value', snap => {
-        document.getElementById('statOnlineCount').innerText = snap.numChildren();
+        document.getElementById('statOnlineCount').innerText = snap.numChildren() || 1;
       });
 
-      // Listen for partner invitations
+      // Always listen for direct invites
       listenForDirectSignals();
     }).catch(err => {
-      alert("Firebase Init Failed: " + err.message);
+      alert("Database error: " + err.message);
     });
 
-    // 2. Camera Initializer
+    // 2. Camera Initializer (Fallback protected)
     async function initCamera() {
       if (localStream) return true;
 
@@ -521,160 +521,149 @@
         await localVideo.play();
         return true;
       } catch (err) {
-        console.warn("Fallback to basic stream constraint...");
         try {
           localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
           localVideo.srcObject = localStream;
           await localVideo.play();
           return true;
         } catch (finalErr) {
-          loaderMessage.innerHTML = "<span style='color:var(--danger);'>Camera / Mic permission denied!</span>";
+          loaderMessage.innerHTML = "<span style='color:var(--danger);'>Please allow camera & microphone access.</span>";
           return false;
         }
       }
     }
 
-    // 3. Matchmaking Button Click
+    // 3. Guaranteed Matchmaking Logic
     nextBtn.addEventListener('click', async () => {
       const ok = await initCamera();
       if (!ok) return;
 
       cleanupSession();
+      isMatching = true;
 
-      btnLabel.innerText = "MATCHING";
+      btnLabel.innerText = "SEARCHING";
       radarLoader.style.display = "flex";
-      loaderMessage.innerText = "Finding a partner...";
-      partnerStatusLabel.innerText = "Searching...";
+      loaderMessage.innerText = "Looking for an available stranger...";
+      partnerStatusLabel.innerText = "Matching...";
 
+      // Check if someone else is already waiting
       const queueRef = db.ref('queue');
       
-      // Atomic queue matching
-      queueRef.transaction(queue => {
-        if (!queue) {
-          return { [myUserId]: { time: Date.now() } };
-        }
-        
-        const partner = Object.keys(queue).find(uid => uid !== myUserId);
-        if (partner) {
-          delete queue[partner]; // Take opponent out of queue
-          return queue;
-        } else {
-          queue[myUserId] = { time: Date.now() };
-          return queue;
-        }
-      }, (err, committed, snap) => {
-        if (err || !committed) return;
-        
-        // Scan who we matched with
-        queueRef.once('value').then(latest => {
-          checkQueueAndSignal();
-        });
-      });
-    });
-
-    function checkQueueAndSignal() {
-      db.ref('queue').once('value').then(snap => {
+      queueRef.once('value').then(snap => {
         const queue = snap.val() || {};
-        const partner = Object.keys(queue).find(uid => uid !== myUserId);
-        
-        if (partner && !activeSessionId) {
-          // I am the Caller
-          db.ref(`queue/${partner}`).remove();
+        const availableUids = Object.keys(queue).filter(uid => uid !== myUserId);
+
+        if (availableUids.length > 0) {
+          // A partner is available! Grab them
+          const partnerId = availableUids[0];
+          
+          // Remove partner and myself from queue immediately
+          db.ref(`queue/${partnerId}`).remove();
           db.ref(`queue/${myUserId}`).remove();
 
+          // I will be Caller and create Session
           activeSessionId = db.ref('sessions').push().key;
-          currentPartnerId = partner;
+          currentPartnerId = partnerId;
           isCaller = true;
 
-          db.ref(`signals/${partner}`).set({
+          // Dispatch signal to partner
+          db.ref(`signals/${partnerId}`).set({
             sessionId: activeSessionId,
             partnerId: myUserId
           });
 
-          setupPeerConnection();
+          startWebRTC();
+        } else {
+          // No one available yet, put myself in queue and wait
+          queueRef.child(myUserId).set({ time: Date.now() });
+          queueRef.child(myUserId).onDisconnect().remove();
+          loaderMessage.innerText = "You are in queue. Waiting for another user...";
         }
       });
-    }
+    });
 
+    // Listen for direct invitations (Callee side)
     function listenForDirectSignals() {
       db.ref(`signals/${myUserId}`).on('value', async snap => {
         const val = snap.val();
         if (val && val.sessionId && !activeSessionId) {
-          // I am the Callee (Receiver)
           activeSessionId = val.sessionId;
           currentPartnerId = val.partnerId;
           isCaller = false;
 
+          // Remove my traces from queue and signal
           db.ref(`queue/${myUserId}`).remove();
           db.ref(`signals/${myUserId}`).remove();
 
-          setupPeerConnection();
+          const ok = await initCamera();
+          if (ok) {
+            startWebRTC();
+          }
         }
       });
     }
 
-    // 4. Robust WebRTC Engine
-    async function setupPeerConnection() {
+    // 4. WebRTC Connection Setup
+    async function startWebRTC() {
       btnLabel.innerText = "NEXT";
-      loaderMessage.innerText = "Connecting video streams...";
-      partnerStatusLabel.innerText = "Connecting...";
+      loaderMessage.innerText = "Found a partner! Handshaking...";
+      partnerStatusLabel.innerText = "Handshaking...";
 
-      pendingRemoteCandidates = [];
+      pendingIceCandidates = [];
       peerConnection = new RTCPeerConnection(rtcConfig);
 
-      // Create new remote stream container
+      // Prepare empty stream for incoming remote video
       remoteStream = new MediaStream();
       remoteVideo.srcObject = remoteStream;
 
-      // 1. Add local tracks to connection
+      // Add my tracks to WebRTC
       localStream.getTracks().forEach(track => {
         peerConnection.addTrack(track, localStream);
       });
 
-      // 2. Receive remote stream tracks
+      // Handle receiving tracks
       peerConnection.ontrack = (event) => {
         event.streams[0].getTracks().forEach(track => {
           remoteStream.addTrack(track);
         });
 
-        remoteVideo.play().catch(e => console.log("Remote play muted auto:", e));
+        remoteVideo.play().catch(e => console.log("Auto play prevented", e));
         radarLoader.style.display = "none";
         partnerTag.style.display = "flex";
-        partnerStatusLabel.innerText = "Connected Live";
+        partnerStatusLabel.innerText = "Live";
       };
 
-      // 3. ICE Exchange Channels
-      const myChannel = isCaller ? 'callerCandidates' : 'calleeCandidates';
-      const remoteChannel = isCaller ? 'calleeCandidates' : 'callerCandidates';
+      const sessionRef = db.ref(`sessions/${activeSessionId}`);
+      const myCandidatePath = isCaller ? 'callerCandidates' : 'calleeCandidates';
+      const remoteCandidatePath = isCaller ? 'calleeCandidates' : 'callerCandidates';
 
-      peerConnection.onicecandidate = (event) => {
-        if (event.candidate && activeSessionId) {
-          db.ref(`sessions/${activeSessionId}/${myChannel}`).push(event.candidate.toJSON());
+      // Send local ICE candidates to Firebase
+      peerConnection.onicecandidate = (e) => {
+        if (e.candidate && activeSessionId) {
+          sessionRef.child(myCandidatePath).push(e.candidate.toJSON());
         }
       };
 
-      // Receive candidates from partner
-      db.ref(`sessions/${activeSessionId}/${remoteChannel}`).on('child_added', async snap => {
-        const candidateData = snap.val();
-        if (candidateData) {
-          const candidate = new RTCIceCandidate(candidateData);
+      // Listen for incoming ICE candidates
+      sessionRef.child(remoteCandidatePath).on('child_added', async snap => {
+        const data = snap.val();
+        if (data) {
+          const candidate = new RTCIceCandidate(data);
           if (peerConnection && peerConnection.remoteDescription) {
             try {
               await peerConnection.addIceCandidate(candidate);
-            } catch (e) {
-              console.error("Error adding ice candidate:", e);
+            } catch (err) {
+              console.error("Candidate add error", err);
             }
           } else {
-            pendingRemoteCandidates.push(candidate);
+            pendingIceCandidates.push(candidate);
           }
         }
       });
 
-      const sessionRef = db.ref(`sessions/${activeSessionId}`);
-
-      // 4. SDP Handshake (Offer / Answer)
+      // SDP Offer / Answer Exchange
       if (isCaller) {
-        // Caller creates offer
+        // Create Offer
         const offer = await peerConnection.createOffer({
           offerToReceiveAudio: true,
           offerToReceiveVideo: true
@@ -690,17 +679,16 @@
           const answer = snap.val();
           if (answer && peerConnection && !peerConnection.currentRemoteDescription) {
             await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
-            processPendingCandidates();
+            flushPendingCandidates();
           }
         });
-
       } else {
-        // Callee receives offer and creates answer
+        // Callee: Wait for offer
         sessionRef.child('offer').on('value', async snap => {
           const offer = snap.val();
           if (offer && peerConnection && !peerConnection.currentRemoteDescription) {
             await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-            processPendingCandidates();
+            flushPendingCandidates();
 
             const answer = await peerConnection.createAnswer();
             await peerConnection.setLocalDescription(answer);
@@ -712,36 +700,36 @@
         });
       }
 
-      // Chat Messages Listener
+      // Live Chat listener
       sessionRef.child('messages').on('child_added', snap => {
         renderMessage(snap.val());
       });
 
-      // Disconnect monitor
+      // Disconnect handling
       peerConnection.oniceconnectionstatechange = () => {
         if (["disconnected", "failed", "closed"].includes(peerConnection.iceConnectionState)) {
-          partnerStatusLabel.innerText = "Disconnected";
+          partnerStatusLabel.innerText = "Left";
           partnerTag.style.display = "none";
           remoteVideo.srcObject = null;
           radarLoader.style.display = "flex";
-          loaderMessage.innerText = "Stranger left. Click NEXT.";
+          loaderMessage.innerText = "Partner disconnected. Click NEXT.";
         }
       };
     }
 
-    // Flush any pending candidates after remote description is set
-    async function processPendingCandidates() {
-      while (pendingRemoteCandidates.length > 0) {
-        const cand = pendingRemoteCandidates.shift();
+    // Process queued candidates
+    async function flushPendingCandidates() {
+      while (pendingIceCandidates.length > 0) {
+        const cand = pendingIceCandidates.shift();
         try {
           await peerConnection.addIceCandidate(cand);
-        } catch (err) {
-          console.error("Error processing candidate:", err);
+        } catch (e) {
+          console.error("Error processing candidate", e);
         }
       }
     }
 
-    // 5. Cleanup and Reset
+    // 5. Cleanup
     function cleanupSession() {
       if (activeSessionId) {
         db.ref(`sessions/${activeSessionId}`).remove();
@@ -761,10 +749,11 @@
       remoteVideo.srcObject = null;
       partnerTag.style.display = "none";
       chatList.innerHTML = '';
-      pendingRemoteCandidates = [];
+      pendingIceCandidates = [];
+      isMatching = false;
     }
 
-    // 6. Chat actions
+    // 6. Chat form
     document.getElementById('chatForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const txt = chatInput.value.trim();
@@ -786,29 +775,29 @@
       chatList.scrollTop = chatList.scrollHeight;
     }
 
-    // 7. Stream Toggles
+    // 7. Media toggles
     document.getElementById('micBtn').addEventListener('click', () => {
       if (!localStream) return;
-      const audioTrack = localStream.getAudioTracks()[0];
-      if (audioTrack) {
-        audioTrack.enabled = !audioTrack.enabled;
-        document.getElementById('micBtn').classList.toggle('off', !audioTrack.enabled);
+      const t = localStream.getAudioTracks()[0];
+      if (t) {
+        t.enabled = !t.enabled;
+        document.getElementById('micBtn').classList.toggle('off', !t.enabled);
       }
     });
 
     document.getElementById('camBtn').addEventListener('click', () => {
       if (!localStream) return;
-      const videoTrack = localStream.getVideoTracks()[0];
-      if (videoTrack) {
-        videoTrack.enabled = !videoTrack.enabled;
-        document.getElementById('camBtn').classList.toggle('off', !videoTrack.enabled);
+      const t = localStream.getVideoTracks()[0];
+      if (t) {
+        t.enabled = !t.enabled;
+        document.getElementById('camBtn').classList.toggle('off', !t.enabled);
       }
     });
 
     document.getElementById('switchCamBtn').addEventListener('click', async () => {
       facingMode = (facingMode === "user") ? "environment" : "user";
       if (localStream) {
-        localStream.getTracks().forEach(t => t.stop());
+        localStream.getTracks().forEach(tr => tr.stop());
         localStream = null;
       }
       await initCamera();
