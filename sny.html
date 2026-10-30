@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMEN | Central Administration</title>
+  <title>LUMEN | Admin Enforcement</title>
 
-  <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Firebase Scripts -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -22,30 +20,17 @@
       --card-bg: rgba(18, 24, 38, 0.7);
       --border: rgba(255, 255, 255, 0.08);
       --neon-cyan: #00f2fe;
-      --neon-purple: #7928ca;
       --danger: #ef4444;
       --success: #10b981;
       --text: #f8fafc;
       --text-dim: #94a3b8;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-    }
-
-    /* Sidebar Navigation */
     aside {
-      width: 260px;
+      width: 250px;
       background: rgba(14, 18, 29, 0.95);
       border-right: 1px solid var(--border);
       padding: 24px;
@@ -54,190 +39,62 @@
       gap: 30px;
     }
 
-    .brand {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--neon-cyan);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
+    .brand { font-size: 1.25rem; font-weight: 700; color: var(--neon-cyan); display: flex; align-items: center; gap: 10px; }
+    .menu { list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .menu-item {
-      padding: 12px 16px;
-      border-radius: 12px;
-      color: var(--text-dim);
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: all 0.2s;
+      padding: 12px 16px; border-radius: 12px; color: var(--text-dim); font-weight: 500; cursor: pointer;
+      display: flex; align-items: center; gap: 12px; transition: all 0.2s;
     }
+    .menu-item:hover, .menu-item.active { background: rgba(0, 242, 254, 0.1); color: var(--neon-cyan); }
 
-    .menu-item:hover, .menu-item.active {
-      background: rgba(0, 242, 254, 0.1);
-      color: var(--neon-cyan);
-    }
+    main { flex: 1; padding: 30px; overflow-y: auto; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
 
-    /* Main Content Area */
-    main {
-      flex: 1;
-      padding: 30px;
-      overflow-y: auto;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-
-    /* Metric Cards */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
     .metric-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
+      display: flex; align-items: center; gap: 14px;
     }
+    .metric-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .metric-value { font-size: 1.5rem; font-weight: 700; margin-top: 2px; }
 
-    .metric-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-    }
+    .section-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 20px; margin-bottom: 25px; }
+    .section-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
 
-    .metric-value {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-top: 4px;
-    }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { padding: 10px 14px; color: var(--text-dim); font-weight: 500; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); font-size: 0.9rem; }
 
-    /* Data Tables */
-    .section-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
-      margin-bottom: 25px;
+    .btn-action-ban {
+      background: rgba(239, 68, 68, 0.15); border: 1px solid var(--danger); color: var(--danger);
+      padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.8rem;
     }
+    .btn-action-ban:hover { background: var(--danger); color: #fff; }
 
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .btn-action-unban {
+      background: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success);
+      padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.8rem;
     }
+    .btn-action-unban:hover { background: var(--success); color: #fff; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    th {
-      padding: 12px 16px;
-      color: var(--text-dim);
-      font-weight: 500;
-      border-bottom: 1px solid var(--border);
-    }
-
-    td {
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      font-size: 0.95rem;
-    }
-
-    .btn-action {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid var(--danger);
-      color: var(--danger);
-      padding: 6px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.8rem;
-      transition: 0.2s;
-    }
-
-    .btn-action:hover {
-      background: var(--danger);
-      color: #fff;
-    }
-
-    /* Auth Locker Overlay */
-    .admin-gate {
-      position: fixed;
-      inset: 0;
-      background: #06080e;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .gate-box {
-      width: 100%;
-      max-width: 400px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 35px;
-      text-align: center;
-    }
-
-    .gate-input {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
-      margin: 20px 0;
-      color: #fff;
-      text-align: center;
-      outline: none;
-    }
+    .admin-gate { position: fixed; inset: 0; background: #06080e; z-index: 1000; display: flex; align-items: center; justify-content: center; }
+    .gate-box { width: 100%; max-width: 380px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; text-align: center; }
+    .gate-input { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 18px 0; color: #fff; text-align: center; outline: none; }
   </style>
 </head>
 <body>
 
-  <!-- Secure Gate Lock (Default Passcode: admin123) -->
+  <!-- Secure Gate Lock (Passcode: admin123) -->
   <div class="admin-gate" id="adminGate">
     <div class="gate-box">
-      <i class="fa-solid fa-lock" style="font-size: 2.5rem; color: var(--neon-cyan); margin-bottom: 15px;"></i>
-      <h2>Authorized Terminal</h2>
-      <p style="color:var(--text-dim); font-size:0.85rem; margin-top:8px;">Enter administrative key to unlock</p>
-      <input type="password" class="gate-input" id="adminPassKey" placeholder="Access Key">
-      <button onclick="unlockDashboard()" style="width:100%; padding: 12px; border:none; background: var(--neon-cyan); color:#000; font-weight:700; border-radius:12px; cursor:pointer;">Authenticate</button>
+      <i class="fa-solid fa-lock" style="font-size: 2.5rem; color: var(--neon-cyan); margin-bottom: 12px;"></i>
+      <h2>Admin Terminal</h2>
+      <p style="color:var(--text-dim); font-size:0.85rem; margin-top:6px;">Enter Security Key</p>
+      <input type="password" class="gate-input" id="adminPassKey" placeholder="Access Passcode">
+      <button onclick="unlockDashboard()" style="width:100%; padding: 12px; border:none; background: var(--neon-cyan); color:#000; font-weight:700; border-radius:12px; cursor:pointer;">Access Panel</button>
     </div>
   </div>
 
-  <!-- Sidebar -->
   <aside>
     <div class="brand">
       <i class="fa-solid fa-shield-halved"></i>
@@ -245,100 +102,77 @@
     </div>
     <ul class="menu">
       <li class="menu-item active"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
-      <li class="menu-item" onclick="clearAllQueues()"><i class="fa-solid fa-rotate"></i> Reset Queue</li>
-      <li class="menu-item" onclick="purgeSessions()"><i class="fa-solid fa-ban"></i> Terminate Calls</li>
+      <li class="menu-item" onclick="purgeQueues()"><i class="fa-solid fa-rotate"></i> Clear Queue</li>
     </ul>
   </aside>
 
-  <!-- Content -->
   <main>
     <header>
       <div>
-        <h1>Command Center</h1>
-        <p style="color:var(--text-dim); font-size:0.9rem;">Real-time video matchmaking overview and platform enforcement</p>
+        <h1>Security & Moderation</h1>
+        <p style="color:var(--text-dim); font-size:0.85rem;">Live User Management & Enforcement</p>
       </div>
-      <div id="liveClock" style="font-weight: 600; color: var(--neon-cyan);"></div>
     </header>
 
-    <!-- Top Counters -->
     <div class="stats-row">
       <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
-          <i class="fa-solid fa-users"></i>
-        </div>
+        <div class="metric-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);"><i class="fa-solid fa-users"></i></div>
         <div>
-          <span style="color:var(--text-dim); font-size:0.8rem;">Online Users</span>
+          <span style="color:var(--text-dim); font-size:0.75rem;">Online Users</span>
           <div class="metric-value" id="countOnline">0</div>
         </div>
       </div>
-
       <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(0, 242, 254, 0.1); color: var(--neon-cyan);">
-          <i class="fa-solid fa-video"></i>
-        </div>
+        <div class="metric-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);"><i class="fa-solid fa-ban"></i></div>
         <div>
-          <span style="color:var(--text-dim); font-size:0.8rem;">Active Sessions</span>
-          <div class="metric-value" id="countSessions">0</div>
-        </div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
-          <i class="fa-solid fa-flag"></i>
-        </div>
-        <div>
-          <span style="color:var(--text-dim); font-size:0.8rem;">Pending Reports</span>
-          <div class="metric-value" id="countReports">0</div>
+          <span style="color:var(--text-dim); font-size:0.75rem;">Suspended Accounts</span>
+          <div class="metric-value" id="countBanned">0</div>
         </div>
       </div>
     </div>
 
-    <!-- Active Reports -->
+    <!-- Active Users Table (With BAN Option) -->
     <div class="section-card">
       <div class="section-title">
-        <i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i>
-        <span>User Abuse Reports</span>
+        <i class="fa-solid fa-signal" style="color: var(--neon-cyan);"></i>
+        <span>Live Online Participants</span>
       </div>
       <table>
         <thead>
           <tr>
-            <th>Offender ID</th>
-            <th>Reason</th>
-            <th>Reporter ID</th>
-            <th>Timestamp</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="reportTableBody">
-          <tr><td colspan="5" style="text-align: center; color: var(--text-dim);">No active reports detected.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Live Online Users -->
-    <div class="section-card">
-      <div class="section-title">
-        <i class="fa-solid fa-globe" style="color: var(--neon-cyan);"></i>
-        <span>Connected Participants</span>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>UID</th>
-            <th>Display Identity</th>
-            <th>Country</th>
+            <th>User UID</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody id="userTableBody">
-          <tr><td colspan="4" style="text-align: center; color: var(--text-dim);">Scanning for online participants...</td></tr>
+          <tr><td colspan="3" style="text-align: center; color: var(--text-dim);">No online participants.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Banned Accounts Table (With UNBAN Option) -->
+    <div class="section-card">
+      <div class="section-title">
+        <i class="fa-solid fa-user-slash" style="color: var(--danger);"></i>
+        <span>Suspended Accounts (Auto & Manual Bans)</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Suspended UID</th>
+            <th>Reason / Source</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bannedTableBody">
+          <tr><td colspan="3" style="text-align: center; color: var(--text-dim);">No banned users found.</td></tr>
         </tbody>
       </table>
     </div>
   </main>
 
   <script>
-    /* 1. FIREBASE CONFIGURATION */
     const firebaseConfig = {
       apiKey: "AIzaSyAB5pjAvTcmbiZ7Ibr63e5gINIONvby8qs",
       authDomain: "copytvlive.firebaseapp.com",
@@ -352,16 +186,99 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Clock
-    setInterval(() => {
-      document.getElementById('liveClock').innerText = new Date().toLocaleTimeString();
-    }, 1000);
-
-    /* Admin Authentication (Passcode: admin123) */
     function unlockDashboard() {
-      const key = document.getElementById('adminPassKey').value;
-      if (key === "admin123") {
+      if (document.getElementById('adminPassKey').value === "admin123") {
         document.getElementById('adminGate').style.display = 'none';
-        initAdminListeners();
+        initListeners();
       } else {
-        alert("Invalid Access Code");
+        alert("Incorrect Admin Key");
+      }
+    }
+
+    function initListeners() {
+      // 1. Online Users Monitor
+      db.ref('users').on('value', snap => {
+        const users = snap.val() || {};
+        const tbody = document.getElementById('userTableBody');
+        tbody.innerHTML = '';
+        const keys = Object.keys(users);
+        document.getElementById('countOnline').innerText = keys.length;
+
+        if (keys.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">No users online</td></tr>`;
+          return;
+        }
+
+        keys.forEach(uid => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-family:monospace; color:var(--neon-cyan);">${uid}</td>
+            <td><span style="color:var(--success);">Connected</span></td>
+            <td>
+              <button class="btn-action-ban" onclick="banUser('${uid}', 'Manual Admin Suspension')">
+                <i class="fa-solid fa-gavel"></i> BAN
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      });
+
+      // 2. Banned Users Monitor (For UNBAN)
+      db.ref('banned').on('value', snap => {
+        const banned = snap.val() || {};
+        const tbody = document.getElementById('bannedTableBody');
+        tbody.innerHTML = '';
+        const keys = Object.keys(banned);
+        document.getElementById('countBanned').innerText = keys.length;
+
+        if (keys.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">No suspended accounts.</td></tr>`;
+          return;
+        }
+
+        keys.forEach(uid => {
+          const info = banned[uid] || {};
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-family:monospace; color:var(--danger);">${uid}</td>
+            <td><strong>${info.reason || 'Safety Policy Violation'}</strong></td>
+            <td>
+              <button class="btn-action-unban" onclick="unbanUser('${uid}')">
+                <i class="fa-solid fa-unlock"></i> UNBAN / RESTORE
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      });
+    }
+
+    // BAN ACTION
+    function banUser(uid, reason) {
+      if (confirm(`Are you sure you want to BAN user: ${uid}?`)) {
+        db.ref(`banned/${uid}`).set({
+          reason: reason,
+          bannedAt: firebase.database.ServerValue.TIMESTAMP
+        });
+        db.ref(`users/${uid}`).remove();
+        db.ref(`queue/${uid}`).remove();
+        alert("User banned successfully.");
+      }
+    }
+
+    // UNBAN ACTION
+    function unbanUser(uid) {
+      if (confirm(`Are you sure you want to UNBAN user: ${uid}?`)) {
+        db.ref(`banned/${uid}`).remove();
+        alert("User account has been restored (Unbanned).");
+      }
+    }
+
+    function purgeQueues() {
+      db.ref('queue').remove();
+      alert("Queue reset successfully.");
+    }
+  </script>
+</body>
+</html>
