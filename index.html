@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LUMEN | Instant Video Connect</title>
+  <title>LUMEN | Next-Gen Video Connect</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Firebase Scripts (Compat) -->
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -50,7 +50,7 @@
     }
 
     header {
-      height: 65px;
+      height: 60px;
       padding: 0 1.5rem;
       display: flex;
       align-items: center;
@@ -64,9 +64,9 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       background: linear-gradient(135deg, var(--cyan), var(--blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -76,9 +76,9 @@
       background: rgba(16, 185, 129, 0.12);
       border: 1px solid rgba(16, 185, 129, 0.3);
       color: var(--success);
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -86,23 +86,24 @@
 
     .badge-online::before {
       content: '';
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       background: var(--success);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--success);
+      box-shadow: 0 0 6px var(--success);
     }
 
+    /* Desktop View Grid */
     .app-container {
       flex: 1;
       display: grid;
-      grid-template-columns: 1fr 360px;
+      grid-template-columns: 1fr 340px;
       gap: 15px;
       padding: 15px;
       max-width: 1600px;
       margin: 0 auto;
       width: 100%;
-      height: calc(100vh - 65px);
+      height: calc(100vh - 60px);
     }
 
     .video-deck {
@@ -131,9 +132,7 @@
       justify-content: center;
     }
 
-    .video-card.remote {
-      border: 1px solid rgba(0, 242, 254, 0.3);
-    }
+    .video-card.remote { border: 1px solid rgba(0, 242, 254, 0.3); }
 
     video {
       width: 100%;
@@ -142,23 +141,21 @@
       background: #000;
     }
 
-    .video-card.local video {
-      transform: scaleX(-1);
-    }
+    .video-card.local video { transform: scaleX(-1); }
 
     .user-tag {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 12px;
+      left: 12px;
       background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 5px 12px;
-      border-radius: 10px;
-      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       z-index: 2;
     }
 
@@ -167,7 +164,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       color: var(--text-sub);
       text-align: center;
       padding: 15px;
@@ -175,8 +172,8 @@
     }
 
     .radar-pulse {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       background: rgba(0, 242, 254, 0.15);
       border: 2px solid var(--cyan);
@@ -188,26 +185,27 @@
 
     @keyframes pulse {
       0% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7); }
-      70% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 0 20px rgba(0, 242, 254, 0); }
+      70% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 0 15px rgba(0, 242, 254, 0); }
       100% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
     }
 
+    /* Controls Panel */
     .controls-panel {
-      height: 75px;
+      height: 70px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 16px;
       backdrop-filter: blur(20px);
     }
 
     .ctrl-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn {
@@ -222,46 +220,53 @@
     }
 
     .btn-icon {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text);
-      font-size: 1rem;
-    }
-
-    .btn-icon:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .btn-icon.off {
-      background: rgba(239, 68, 68, 0.2);
-      border-color: var(--danger);
-      color: var(--danger);
-    }
-
-    .btn-next {
-      height: 48px;
-      padding: 0 28px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-      color: #000;
       font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      font-weight: 700;
-      box-shadow: 0 6px 20px rgba(0, 242, 254, 0.3);
+    }
+
+    .btn-icon:hover { background: rgba(255, 255, 255, 0.15); }
+    .btn-icon.off { background: rgba(239, 68, 68, 0.2); border-color: var(--danger); color: var(--danger); }
+
+    .btn-action-hub {
+      display: flex;
       gap: 8px;
     }
 
-    .btn-next:active {
-      transform: scale(0.97);
+    .btn-next {
+      height: 44px;
+      padding: 0 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #000;
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
+      gap: 6px;
     }
 
+    .btn-stop {
+      height: 44px;
+      padding: 0 18px;
+      border-radius: 12px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      font-size: 0.9rem;
+      font-weight: 700;
+      gap: 6px;
+    }
+    .btn-stop:hover { background: var(--danger); color: #fff; }
+
+    /* Desktop Live Chat */
     .chat-panel {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 18px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -270,61 +275,50 @@
     }
 
     .chat-header {
-      padding: 16px;
+      padding: 14px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .chat-messages {
       flex: 1;
-      padding: 14px;
+      padding: 12px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .msg-bubble {
       max-width: 85%;
       padding: 8px 12px;
-      border-radius: 14px;
-      font-size: 0.88rem;
-      line-height: 1.4;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      line-height: 1.35;
       word-break: break-word;
     }
 
-    .msg-bubble.me {
-      align-self: flex-end;
-      background: linear-gradient(135deg, var(--purple), #4f46e5);
-      color: #fff;
-    }
-
-    .msg-bubble.them {
-      align-self: flex-start;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
+    .msg-bubble.me { align-self: flex-end; background: linear-gradient(135deg, var(--purple), #4f46e5); color: #fff; }
+    .msg-bubble.them { align-self: flex-start; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.05); }
 
     .chat-footer {
-      padding: 12px;
+      padding: 10px;
       background: rgba(0, 0, 0, 0.25);
       border-top: 1px solid var(--border);
-      display: flex;
     }
 
     .chat-box {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: 12px;
-      width: 100%;
+      padding: 6px 10px;
+      border-radius: 10px;
     }
 
     .chat-box input {
@@ -333,23 +327,72 @@
       border: none;
       outline: none;
       color: #fff;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
-    .chat-box button {
-      background: transparent;
-      border: none;
-      color: var(--cyan);
-      cursor: pointer;
-    }
+    .chat-box button { background: transparent; border: none; color: var(--cyan); cursor: pointer; }
 
-    @media (max-width: 900px) {
-      .app-container { grid-template-columns: 1fr; height: auto; }
-      .videos-wrapper { height: 60vh; }
-      .chat-panel { height: 350px; }
-    }
-    @media (max-width: 600px) {
-      .videos-wrapper { grid-template-columns: 1fr; height: 70vh; }
+    /* Hidden Canvas for Safety/NSFW Auto-Scan */
+    #safetyCanvas { display: none; }
+
+    /* ==========================================================
+       MOBILE RESPONSIVE RULES (Max Width 768px)
+       ========================================================== */
+    @media (max-width: 768px) {
+      header { height: 50px; padding: 0 1rem; }
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+        gap: 8px;
+        height: calc(100vh - 50px);
+      }
+      .video-deck {
+        flex: 1;
+        position: relative;
+        height: 100%;
+      }
+      .videos-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 8px;
+      }
+      /* Top = Stranger (OmeTV style) */
+      .video-card.remote {
+        flex: 1;
+        width: 100%;
+        border-radius: 14px;
+      }
+      /* Bottom = Self */
+      .video-card.local {
+        height: 140px;
+        width: 105px;
+        position: absolute;
+        bottom: 85px;
+        right: 12px;
+        border-radius: 12px;
+        z-index: 10;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        border: 2px solid rgba(0, 242, 254, 0.4);
+      }
+      .controls-panel {
+        height: 65px;
+        padding: 0 10px;
+        border-radius: 14px;
+      }
+      .btn-icon { width: 38px; height: 38px; font-size: 0.85rem; }
+      .btn-next, .btn-stop { height: 38px; padding: 0 14px; font-size: 0.8rem; }
+      
+      /* Mobile Compact Chat Overlay */
+      .chat-panel {
+        height: 110px;
+        border-radius: 12px;
+      }
+      .chat-header { display: none; }
+      .chat-messages { padding: 6px; gap: 4px; }
+      .msg-bubble { font-size: 0.75rem; padding: 4px 8px; }
+      .chat-footer { padding: 6px; }
     }
   </style>
 </head>
@@ -369,15 +412,7 @@
     <section class="video-deck">
       <div class="videos-wrapper">
         
-        <!-- Local Stream -->
-        <div class="video-card local">
-          <video id="localVideo" autoplay playsinline muted></video>
-          <div class="user-tag">
-            <span>You</span>
-          </div>
-        </div>
-
-        <!-- Remote Stream -->
+        <!-- Remote Partner Video -->
         <div class="video-card remote">
           <video id="remoteVideo" autoplay playsinline></video>
           <div class="user-tag" id="partnerTag" style="display: none;">
@@ -386,15 +421,21 @@
           
           <div class="screen-loader" id="radarLoader">
             <div class="radar-pulse">
-              <i class="fa-solid fa-video" style="color: var(--cyan); font-size: 1.3rem;"></i>
+              <i class="fa-solid fa-video" style="color: var(--cyan); font-size: 1.2rem;"></i>
             </div>
-            <p id="loaderMessage">Click START on BOTH devices to match</p>
+            <p id="loaderMessage" style="font-size: 0.85rem;">Click START to connect with someone</p>
           </div>
+        </div>
+
+        <!-- Local Self Video -->
+        <div class="video-card local">
+          <video id="localVideo" autoplay playsinline muted></video>
+          <div class="user-tag"><span>You</span></div>
         </div>
 
       </div>
 
-      <!-- Video Actions Hub -->
+      <!-- Controls Hub with START and STOP -->
       <div class="controls-panel">
         <div class="ctrl-group">
           <button class="btn btn-icon" id="micBtn" title="Mic On/Off"><i class="fa-solid fa-microphone"></i></button>
@@ -402,10 +443,14 @@
           <button class="btn btn-icon" id="switchCamBtn" title="Flip Camera"><i class="fa-solid fa-camera-rotate"></i></button>
         </div>
 
-        <div class="ctrl-group">
+        <div class="btn-action-hub">
           <button class="btn btn-next" id="nextBtn">
             <i class="fa-solid fa-play"></i>
             <span id="btnLabel">START</span>
+          </button>
+          <button class="btn btn-stop" id="stopBtn" style="display: none;">
+            <i class="fa-solid fa-stop"></i>
+            <span>STOP</span>
           </button>
         </div>
 
@@ -415,7 +460,7 @@
       </div>
     </section>
 
-    <!-- Side Chat -->
+    <!-- Side Chat Panel -->
     <aside class="chat-panel">
       <div class="chat-header">
         <span>Live Conversation</span>
@@ -437,6 +482,9 @@
     </aside>
   </main>
 
+  <!-- Auto-Moderation Scanner Frame -->
+  <canvas id="safetyCanvas" width="64" height="48"></canvas>
+
   <script>
     /* FIREBASE CONFIGURATION */
     const firebaseConfig = {
@@ -453,7 +501,6 @@
     const auth = firebase.auth();
     const db = firebase.database();
 
-    // High quality STUN configuration
     const rtcConfig = {
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" },
@@ -473,11 +520,13 @@
     let isCaller = false;
     let facingMode = "user";
     let pendingIceCandidates = [];
-    let isMatching = false;
+    let isConnected = false;
+    let safetyInterval = null;
 
     const localVideo = document.getElementById('localVideo');
     const remoteVideo = document.getElementById('remoteVideo');
     const nextBtn = document.getElementById('nextBtn');
+    const stopBtn = document.getElementById('stopBtn');
     const btnLabel = document.getElementById('btnLabel');
     const loaderMessage = document.getElementById('loaderMessage');
     const radarLoader = document.getElementById('radarLoader');
@@ -485,11 +534,22 @@
     const partnerStatusLabel = document.getElementById('partnerStatusLabel');
     const chatList = document.getElementById('chatList');
     const chatInput = document.getElementById('chatInput');
+    const canvas = document.getElementById('safetyCanvas');
+    const ctx = canvas.getContext('2d');
 
-    // 1. Initial Authentication
+    // 1. Initial Authentication & Ban Listener
     auth.signInAnonymously().then(res => {
       myUserId = res.user.uid;
       
+      // Auto Ban Check
+      db.ref(`banned/${myUserId}`).on('value', snap => {
+        if (snap.exists()) {
+          stopAllActivity();
+          alert("🚨 YOUR ACCOUNT HAS BEEN SUSPENDED FOR VIOLATING COMMUNITY STANDARDS.");
+          document.body.innerHTML = "<div style='color:red; text-align:center; margin-top:20vh; font-size:1.5rem;'><h1>403 Forbidden</h1><p>Your access has been suspended by the auto-moderation security system.</p></div>";
+        }
+      });
+
       const userRef = db.ref(`users/${myUserId}`);
       db.ref(".info/connected").on("value", snap => {
         if (snap.val() === true) {
@@ -502,16 +562,12 @@
         document.getElementById('statOnlineCount').innerText = snap.numChildren() || 1;
       });
 
-      // Always listen for direct invites
       listenForDirectSignals();
-    }).catch(err => {
-      alert("Database error: " + err.message);
-    });
+    }).catch(err => alert("Database error: " + err.message));
 
-    // 2. Camera Initializer (Fallback protected)
+    // 2. Camera Initializer
     async function initCamera() {
       if (localStream) return true;
-
       try {
         localStream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: facingMode, width: { ideal: 640 }, height: { ideal: 480 } },
@@ -519,54 +575,97 @@
         });
         localVideo.srcObject = localStream;
         await localVideo.play();
+        startAutoModerationScan();
         return true;
       } catch (err) {
         try {
           localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
           localVideo.srcObject = localStream;
           await localVideo.play();
+          startAutoModerationScan();
           return true;
-        } catch (finalErr) {
-          loaderMessage.innerHTML = "<span style='color:var(--danger);'>Please allow camera & microphone access.</span>";
+        } catch (e) {
+          loaderMessage.innerHTML = "<span style='color:var(--danger);'>Camera / Mic access required!</span>";
           return false;
         }
       }
     }
 
-    // 3. Guaranteed Matchmaking Logic
+    // 3. Automated Safety Guard / NSFW Scanner (Browser Native Scan)
+    function startAutoModerationScan() {
+      if (safetyInterval) clearInterval(safetyInterval);
+      safetyInterval = setInterval(() => {
+        if (!localStream || !isConnected) return;
+        try {
+          ctx.drawImage(localVideo, 0, 0, canvas.width, canvas.height);
+          const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = frame.data;
+          let rTotal = 0, gTotal = 0, bTotal = 0;
+          let suspiciousColorPixels = 0;
+
+          // Simple heuristic pixel analysis for extreme flesh tones / nudity pattern
+          for (let i = 0; i < data.length; i += 4) {
+            const r = data[i], g = data[i + 1], b = data[i + 2];
+            rTotal += r; gTotal += g; bTotal += b;
+            if (r > 120 && g > 70 && b > 50 && r > g && (r - g) > 15 && (r - b) > 15) {
+              suspiciousColorPixels++;
+            }
+          }
+
+          const totalPixels = data.length / 4;
+          const skinRatio = suspiciousColorPixels / totalPixels;
+
+          // If frame is overwhelmingly inappropriate (> 85% skin-to-camera close contact)
+          if (skinRatio > 0.88) {
+            triggerAutoSuspend("Auto-Moderation: Excessive Nudity or Inappropriate Camera Proximity Detected");
+          }
+        } catch (e) {}
+      }, 3500);
+    }
+
+    function triggerAutoSuspend(reason) {
+      if (!myUserId) return;
+      db.ref(`banned/${myUserId}`).set({
+        reason: reason,
+        bannedAt: firebase.database.ServerValue.TIMESTAMP
+      });
+      db.ref('reports').push({
+        reportedUser: myUserId,
+        reason: reason,
+        reporter: "LUMEN-AUTO-AI",
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+      });
+      stopAllActivity();
+    }
+
+    // 4. Start & Stop Button Logic
     nextBtn.addEventListener('click', async () => {
       const ok = await initCamera();
       if (!ok) return;
 
       cleanupSession();
-      isMatching = true;
+      isConnected = true;
 
-      btnLabel.innerText = "SEARCHING";
+      btnLabel.innerText = "NEXT";
+      stopBtn.style.display = "inline-flex";
       radarLoader.style.display = "flex";
-      loaderMessage.innerText = "Looking for an available stranger...";
+      loaderMessage.innerText = "Looking for someone available...";
       partnerStatusLabel.innerText = "Matching...";
 
-      // Check if someone else is already waiting
       const queueRef = db.ref('queue');
-      
       queueRef.once('value').then(snap => {
         const queue = snap.val() || {};
         const availableUids = Object.keys(queue).filter(uid => uid !== myUserId);
 
         if (availableUids.length > 0) {
-          // A partner is available! Grab them
           const partnerId = availableUids[0];
-          
-          // Remove partner and myself from queue immediately
           db.ref(`queue/${partnerId}`).remove();
           db.ref(`queue/${myUserId}`).remove();
 
-          // I will be Caller and create Session
           activeSessionId = db.ref('sessions').push().key;
           currentPartnerId = partnerId;
           isCaller = true;
 
-          // Dispatch signal to partner
           db.ref(`signals/${partnerId}`).set({
             sessionId: activeSessionId,
             partnerId: myUserId
@@ -574,15 +673,34 @@
 
           startWebRTC();
         } else {
-          // No one available yet, put myself in queue and wait
           queueRef.child(myUserId).set({ time: Date.now() });
           queueRef.child(myUserId).onDisconnect().remove();
-          loaderMessage.innerText = "You are in queue. Waiting for another user...";
+          loaderMessage.innerText = "In queue. Waiting for stranger...";
         }
       });
     });
 
-    // Listen for direct invitations (Callee side)
+    stopBtn.addEventListener('click', () => {
+      stopAllActivity();
+    });
+
+    function stopAllActivity() {
+      cleanupSession();
+      if (localStream) {
+        localStream.getTracks().forEach(t => t.stop());
+        localStream = null;
+      }
+      if (safetyInterval) clearInterval(safetyInterval);
+      isConnected = false;
+
+      btnLabel.innerText = "START";
+      stopBtn.style.display = "none";
+      loaderMessage.innerText = "Chat stopped. Press START to connect.";
+      radarLoader.style.display = "flex";
+      partnerStatusLabel.innerText = "Standby";
+    }
+
+    // 5. Signals & WebRTC
     function listenForDirectSignals() {
       db.ref(`signals/${myUserId}`).on('value', async snap => {
         const val = snap.val();
@@ -591,43 +709,39 @@
           currentPartnerId = val.partnerId;
           isCaller = false;
 
-          // Remove my traces from queue and signal
           db.ref(`queue/${myUserId}`).remove();
           db.ref(`signals/${myUserId}`).remove();
 
           const ok = await initCamera();
           if (ok) {
+            isConnected = true;
+            btnLabel.innerText = "NEXT";
+            stopBtn.style.display = "inline-flex";
             startWebRTC();
           }
         }
       });
     }
 
-    // 4. WebRTC Connection Setup
     async function startWebRTC() {
-      btnLabel.innerText = "NEXT";
-      loaderMessage.innerText = "Found a partner! Handshaking...";
-      partnerStatusLabel.innerText = "Handshaking...";
+      loaderMessage.innerText = "Stranger found! Connecting...";
+      partnerStatusLabel.innerText = "Connecting...";
 
       pendingIceCandidates = [];
       peerConnection = new RTCPeerConnection(rtcConfig);
 
-      // Prepare empty stream for incoming remote video
       remoteStream = new MediaStream();
       remoteVideo.srcObject = remoteStream;
 
-      // Add my tracks to WebRTC
       localStream.getTracks().forEach(track => {
         peerConnection.addTrack(track, localStream);
       });
 
-      // Handle receiving tracks
       peerConnection.ontrack = (event) => {
         event.streams[0].getTracks().forEach(track => {
           remoteStream.addTrack(track);
         });
-
-        remoteVideo.play().catch(e => console.log("Auto play prevented", e));
+        remoteVideo.play().catch(() => {});
         radarLoader.style.display = "none";
         partnerTag.style.display = "flex";
         partnerStatusLabel.innerText = "Live";
@@ -637,44 +751,29 @@
       const myCandidatePath = isCaller ? 'callerCandidates' : 'calleeCandidates';
       const remoteCandidatePath = isCaller ? 'calleeCandidates' : 'callerCandidates';
 
-      // Send local ICE candidates to Firebase
       peerConnection.onicecandidate = (e) => {
         if (e.candidate && activeSessionId) {
           sessionRef.child(myCandidatePath).push(e.candidate.toJSON());
         }
       };
 
-      // Listen for incoming ICE candidates
       sessionRef.child(remoteCandidatePath).on('child_added', async snap => {
         const data = snap.val();
         if (data) {
           const candidate = new RTCIceCandidate(data);
           if (peerConnection && peerConnection.remoteDescription) {
-            try {
-              await peerConnection.addIceCandidate(candidate);
-            } catch (err) {
-              console.error("Candidate add error", err);
-            }
+            try { await peerConnection.addIceCandidate(candidate); } catch (err) {}
           } else {
             pendingIceCandidates.push(candidate);
           }
         }
       });
 
-      // SDP Offer / Answer Exchange
       if (isCaller) {
-        // Create Offer
-        const offer = await peerConnection.createOffer({
-          offerToReceiveAudio: true,
-          offerToReceiveVideo: true
-        });
+        const offer = await peerConnection.createOffer({ offerToReceiveAudio: true, offerToReceiveVideo: true });
         await peerConnection.setLocalDescription(offer);
+        await sessionRef.set({ offer: { type: offer.type, sdp: offer.sdp } });
 
-        await sessionRef.set({
-          offer: { type: offer.type, sdp: offer.sdp }
-        });
-
-        // Listen for Answer
         sessionRef.child('answer').on('value', async snap => {
           const answer = snap.val();
           if (answer && peerConnection && !peerConnection.currentRemoteDescription) {
@@ -683,7 +782,6 @@
           }
         });
       } else {
-        // Callee: Wait for offer
         sessionRef.child('offer').on('value', async snap => {
           const offer = snap.val();
           if (offer && peerConnection && !peerConnection.currentRemoteDescription) {
@@ -692,20 +790,15 @@
 
             const answer = await peerConnection.createAnswer();
             await peerConnection.setLocalDescription(answer);
-
-            await sessionRef.update({
-              answer: { type: answer.type, sdp: answer.sdp }
-            });
+            await sessionRef.update({ answer: { type: answer.type, sdp: answer.sdp } });
           }
         });
       }
 
-      // Live Chat listener
       sessionRef.child('messages').on('child_added', snap => {
         renderMessage(snap.val());
       });
 
-      // Disconnect handling
       peerConnection.oniceconnectionstatechange = () => {
         if (["disconnected", "failed", "closed"].includes(peerConnection.iceConnectionState)) {
           partnerStatusLabel.innerText = "Left";
@@ -717,23 +810,15 @@
       };
     }
 
-    // Process queued candidates
     async function flushPendingCandidates() {
       while (pendingIceCandidates.length > 0) {
         const cand = pendingIceCandidates.shift();
-        try {
-          await peerConnection.addIceCandidate(cand);
-        } catch (e) {
-          console.error("Error processing candidate", e);
-        }
+        try { await peerConnection.addIceCandidate(cand); } catch (e) {}
       }
     }
 
-    // 5. Cleanup
     function cleanupSession() {
-      if (activeSessionId) {
-        db.ref(`sessions/${activeSessionId}`).remove();
-      }
+      if (activeSessionId) db.ref(`sessions/${activeSessionId}`).remove();
       db.ref(`queue/${myUserId}`).remove();
       db.ref(`signals/${myUserId}`).remove();
 
@@ -750,7 +835,6 @@
       partnerTag.style.display = "none";
       chatList.innerHTML = '';
       pendingIceCandidates = [];
-      isMatching = false;
     }
 
     // 6. Chat form
@@ -814,7 +898,7 @@
       else document.exitFullscreen();
     });
 
-    window.addEventListener('beforeunload', cleanupSession);
+    window.addEventListener('beforeunload', stopAllActivity);
   </script>
 </body>
 </html>
