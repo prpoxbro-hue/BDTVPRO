@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DOG APPLE X - VIP</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #070003;
+            --card-bg: rgba(18, 3, 8, 0.88);
+            --card-border: #ff3864;
+            --primary-red: #ff3864;
+            --glow-red: rgba(255, 56, 100, 0.65);
+            --red-text: #ff4d6d;
+            --light-red-text: #ff758f;
+            --text-main: #ffffff;
+            --success: #00ff87;
+            --success-glow: rgba(0, 255, 135, 0.8);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Orbitron', sans-serif; 
+            user-select: none; 
+            -webkit-user-select: none;
+        }
+        
+        body {
+            background: #000000 url('https://uploads.onecompiler.io/443fxwbzx/1790016443844/c40396c4-3436-4e3d-8651-a95a4c311777.png') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+            min-height: 100dvh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Ambient Glow Overlay */
+        .ambient-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 56, 100, 0.15) 0%, rgba(0, 0, 0, 0.45) 100%);
+        }
+
+        /* LOGIN DIALOG MODAL */
+        #login-dialog {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%; max-width: 310px;
+            background: rgba(20, 2, 8, 0.96);
+            border: 2px solid var(--primary-red);
+            border-radius: 20px;
+            padding: 22px;
+            z-index: 3000;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 35px var(--glow-red);
+        }
+        #login-dialog img { 
+            width: 100%; 
+            border-radius: 12px; 
+            margin-bottom: 14px; 
+            border: 1px solid rgba(255, 56, 100, 0.4); 
+        }
+        .loading-text { 
+            font-size: 12px; 
+            color: var(--primary-red); 
+            letter-spacing: 2px; 
+            animation: blink 1.2s infinite; 
+            font-weight: 700;
+        }
+
+        /* LOGIN SECTION */
+        #login-section {
+            width: 100%; 
+            height: 100vh;
+            height: 100dvh;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            position: fixed; top: 0; left: 0; z-index: 1000;
+            background: rgba(10, 0, 4, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 16px;
+        }
+        .login-card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--card-border);
+            padding: 28px 22px;
+            width: 100%; max-width: 340px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 56, 100, 0.35);
+        }
+        .app-logo { 
+            width: 75px; 
+            height: 75px; 
+            border-radius: 50%; 
+            border: 2px solid var(--primary-red); 
+            margin-bottom: 12px; 
+            box-shadow: 0 0 20px var(--glow-red);
+            object-fit: cover;
+        }
+        .login-title { 
+            font-size: 20px; 
+            margin-bottom: 20px; 
+            letter-spacing: 2px; 
+            color: #fff;
+        }
+        .login-title span { color: var(--primary-red); }
+
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-label { 
+            color: #ff99ab; 
+            font-size: 10px; 
+            margin-bottom: 6px; 
+            display: block; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+        }
+        .input-field, .custom-select {
+            width: 100%; 
+            padding: 11px; 
+            border: 1px solid rgba(255, 56, 100, 0.4); 
+            border-radius: 8px;
+            background: rgba(22, 2, 8, 0.9); 
+            color: #fff; 
+            outline: none; 
+            font-size: 13px;
+        }
+        .login-btn {
+            width: 100%; 
+            padding: 12px; 
+            border: none; 
+            border-radius: 8px;
+            background: var(--primary-red);
+            color: #fff; 
+            font-weight: 800; 
+            cursor: pointer; 
+            margin-top: 6px; 
+            box-shadow: 0 0 20px rgba(255, 56, 100, 0.6);
+            letter-spacing: 1.5px;
+        }
+
+        /* GAME SECTION */
+        #game-section {
+            display: none; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            min-height: 100dvh;
+            width: 100vw;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* MODE SWITCHER (MOBILE VS PC) */
+        .version-switcher {
+            display: flex;
+            background: rgba(18, 2, 7, 0.85);
+            border: 1.5px solid var(--primary-red);
+            border-radius: 25px;
+            padding: 3px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 15px rgba(255, 56, 100, 0.4);
+            gap: 4px;
+        }
+        .switch-btn {
+            background: transparent;
+            border: none;
+            color: #ff99ab;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .switch-btn.active {
+            background: var(--primary-red);
+            color: #fff;
+            box-shadow: 0 0 12px var(--glow-red);
+        }
+
+        /* Top Header User ID */
+        .top-header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .user-id-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(18, 2, 7, 0.75);
+            padding: 5px 16px;
+            border-radius: 8px;
+            border: 1.5px solid var(--primary-red);
+            box-shadow: 0 0 15px rgba(255, 56, 100, 0.35);
+        }
+        .user-id-badge i {
+            color: var(--primary-red);
+            font-size: 13px;
+        }
+        .user-id-badge span.id-num {
+            color: var(--red-text);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* BOARD AREA */
+        .board-scroll-area {
+            width: 100%;
+            overflow: visible;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tower-board-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tower-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .row-mult-tag {
+            border: 1.5px solid var(--primary-red);
+            border-radius: 6px;
+            background: rgba(18, 2, 7, 0.75);
+            font-weight: 800;
+            color: var(--red-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 8px rgba(255, 56, 100, 0.2);
+            flex-shrink: 0;
+            text-shadow: 0 0 8px rgba(255, 56, 100, 0.5);
+        }
+
+        .row-cells-wrapper {
+            display: flex;
+            flex: 1;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-slot {
+            border-radius: 50%;
+            border: 1.5px solid var(--primary-red);
+            background: radial-gradient(circle, rgba(30, 8, 12, 0.9) 0%, rgba(10, 2, 4, 0.95) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            position: relative;
+            box-shadow: 0 0 8px rgba(255, 56, 100, 0.45);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .item-slot img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* SAFE APPLE CELL HIGHLIGHT */
+        .item-slot.safe {
+            border-color: var(--success);
+            box-shadow: 0 0 14px var(--success-glow);
+            transform: scale(1.08);
+            z-index: 2;
+        }
+
+        /* Start Button */
+        .start-hack-btn {
+            background: var(--primary-red);
+            border: none;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 56, 100, 0.65);
+            transition: transform 0.15s ease, background 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .start-hack-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Developer Credit Card */
+        .dev-credit-card {
+            border: 1.5px solid var(--primary-red);
+            border-radius: 8px;
+            background: rgba(18, 2, 7, 0.75);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 56, 100, 0.25);
+            text-align: center;
+        }
+
+        .dev-avatar {
+            border-radius: 50%;
+            border: 1px solid var(--primary-red);
+            margin-bottom: 2px;
+            object-fit: cover;
+        }
+
+        .dev-title {
+            color: var(--light-red-text);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .dev-link {
+            color: var(--red-text);
+            font-weight: 900;
+            text-decoration: underline;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .nav-btn {
+            background: rgba(18, 2, 7, 0.8);
+            border: 1px solid var(--primary-red);
+            color: #fff;
+            border-radius: 6px;
+            font-size: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ========================================================
+           MODE-BASED STYLING (MOBILE VS PC)
+           ======================================================== */
+
+        /* 1. MOBILE MODE (DEFAULT) */
+        .mode-mobile {
+            max-width: 430px;
+            padding: 8px 12px;
+        }
+        .mode-mobile .board-scroll-area { margin-bottom: 8px; }
+        .mode-mobile .tower-board-container { gap: 4px; }
+        .mode-mobile .tower-row { gap: 6px; }
+        .mode-mobile .row-mult-tag { width: 48px; height: 31px; font-size: 10px; }
+        .mode-mobile .row-cells-wrapper { gap: 5px; }
+        .mode-mobile .item-slot { width: 31px; height: 31px; }
+        .mode-mobile .start-hack-btn { width: 90px; height: 32px; font-size: 12px; margin: 4px 0 8px 0; }
+        .mode-mobile .dev-credit-card { width: 100%; padding: 6px 10px; margin-bottom: 6px; gap: 2px; }
+        .mode-mobile .dev-avatar { width: 20px; height: 20px; }
+        .mode-mobile .dev-title { font-size: 11px; }
+        .mode-mobile .dev-link { font-size: 12px; }
+        .mode-mobile .nav-btn { padding: 4px 10px; }
+
+        /* 2. PC / DESKTOP MODE */
+        .mode-pc {
+            max-width: 780px !important;
+            padding: 15px 20px;
+        }
+        .mode-pc .board-scroll-area { margin-bottom: 12px; }
+        .mode-pc .tower-board-container { gap: 7px; width: 680px; }
+        .mode-pc .tower-row { gap: 14px; }
+        .mode-pc .row-mult-tag { width: 85px; height: 42px; font-size: 14px; border-radius: 8px; }
+        .mode-pc .row-cells-wrapper { gap: 14px; }
+        .mode-pc .item-slot { width: 44px; height: 44px; }
+        .mode-pc .user-id-badge { font-size: 14px; padding: 7px 24px; }
+        .mode-pc .user-id-badge i { font-size: 16px; }
+        .mode-pc .start-hack-btn { width: 140px; height: 42px; font-size: 15px; margin: 8px 0 12px 0; border-radius: 8px; }
+        .mode-pc .dev-credit-card { width: 450px; padding: 10px 15px; margin-bottom: 10px; gap: 4px; }
+        .mode-pc .dev-avatar { width: 26px; height: 26px; }
+        .mode-pc .dev-title { font-size: 13px; }
+        .mode-pc .dev-link { font-size: 14px; }
+        .mode-pc .nav-btn { padding: 6px 16px; font-size: 12px; }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-overlay"></div>
+
+    <!-- DIALOG -->
+    <div id="login-dialog">
+        <img src="https://i.ibb.co/WvN12BFD/Connecting-Loading-GIF-Connecting-Loading-Buffering-Discover-Share-GIFs.gif" alt="Connecting">
+        <div class="loading-text">CONNECTING SERVER...</div>
+    </div>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-section">
+        <div class="login-card">
+            <img src="https://uploads.onecompiler.io/443fxwbzx/1787795816467/5e10d2e3-d2c9-4a8b-ace0-4bce378ee6b1.png" alt="Logo" class="app-logo">
+            <h1 class="login-title">DOG APPLE <span>X</span></h1>
+            
+            <div class="input-group">
+                <label class="input-label">Deposit Amount</label>
+                <select id="deposit-select" class="custom-select">
+                    <option value="10">10 USDT</option>
+                    <option value="20">20 USDT</option>
+                    <option value="30">30 USDT</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Enter Game ID</label>
+                <input type="number" id="login-id" class="input-field" placeholder="UID.XXXXXXXXXX">
+            </div>
+
+            <button class="login-btn" id="btn-login">LOGIN</button>
+        </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="game-section" class="mode-mobile">
+        
+        <!-- VERSION SWITCHER (MOBILE / PC) -->
+        <div class="version-switcher">
+            <button class="switch-btn active" id="btn-mode-mobile">
+                <i class="fa-solid fa-mobile-screen"></i> Mobile
+            </button>
+            <button class="switch-btn" id="btn-mode-pc">
+                <i class="fa-solid fa-desktop"></i> PC Version
+            </button>
+        </div>
+
+        <!-- Top Bar Header with User ID -->
+        <div class="top-header">
+            <div class="user-id-badge">
+                <i class="fa-solid fa-circle-user"></i>
+                <span>User ID</span>
+                <span class="id-num" id="display-uid">1811324865</span>
+            </div>
+        </div>
+
+        <!-- Board Grid -->
+        <div class="board-scroll-area">
+            <div class="tower-board-container" id="tower-board"></div>
+        </div>
+
+        <!-- Start Button -->
+        <button class="start-hack-btn" id="hack-trigger">Start</button>
+
+        <!-- Developer Credit Card -->
+        <div class="dev-credit-card">
+            <img src="https://uploads.onecompiler.io/443fxwbzx/1787795816467/5e10d2e3-d2c9-4a8b-ace0-4bce378ee6b1.png" class="dev-avatar" alt="Dev">
+            <div class="dev-title">Script developed by</div>
+            <a href="https://t.me/SUNNY_BRO1" target="_blank" class="dev-link">@SUNNY_BRO1</a>
+        </div>
+
+        <!-- Controls (Logout) -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btn-logout"><i class="fa-solid fa-power-off"></i> LOGOUT</button>
+        </div>
+    </div>
+
+    <!-- LIBRARIES -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+    <script>
+        // FIREBASE DATABASE CONFIGURATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyAiKZFA28aAzLfXSiR2ad5sk_Q6OFetfZg",
+            authDomain: "aviator-bfccc.firebaseapp.com",
+            databaseURL: "https://aviator-bfccc-default-rtdb.firebaseio.com",
+            projectId: "aviator-bfccc",
+            storageBucket: "aviator-bfccc.appspot.com",
+            messagingSenderId: "341587359596",
+            appId: "1:341587359596:web:440f87ec0109af8f926549",
+            measurementId: "G-LCWT7P2P65"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // IMAGES FOR SLOTS
+        const IMG_WOOD = "https://i.ibb.co/S7WLnVnp/file-000000006b7071fa83c20c3197e4be2b.png";      
+        const IMG_BAD  = "https://i.ibb.co/yFcNT5H3/file-00000000647c71fa8ed4c6349882246f.png";    
+        const IMG_GOOD = "https://i.ibb.co/Txg1RB4K/file-000000001e8871fabe7794bf8e9fa687.png";
+        
+        // Multipliers
+        const multis = ["1.23", "1.54", "1.93", "2.41", "4.02", "6.71", "11.18", "27.97", "69.93", "349.68"];
+        let gameData = {};
+        let currentUserRealUID = null;
+        let isHacked = false;
+
+        // MODE TOGGLE LOGIC (MOBILE / PC)
+        const gameSection = document.getElementById('game-section');
+        const btnMobile = document.getElementById('btn-mode-mobile');
+        const btnPc = document.getElementById('btn-mode-pc');
+
+        function setDisplayMode(mode) {
+            if (mode === 'pc') {
+                gameSection.classList.remove('mode-mobile');
+                gameSection.classList.add('mode-pc');
+                btnPc.classList.add('active');
+                btnMobile.classList.remove('active');
+                localStorage.setItem('vip_app_mode', 'pc');
+            } else {
+                gameSection.classList.remove('mode-pc');
+                gameSection.classList.add('mode-mobile');
+                btnMobile.classList.add('active');
+                btnPc.classList.remove('active');
+                localStorage.setItem('vip_app_mode', 'mobile');
+            }
+        }
+
+        btnMobile.addEventListener('click', () => setDisplayMode('mobile'));
+        btnPc.addEventListener('click', () => setDisplayMode('pc'));
+
+        // BUILD 10-ROW BOARD
+        function buildTowerBoard() {
+            const container = document.getElementById('tower-board');
+            container.innerHTML = '';
+
+            for (let r = 10; r >= 1; r--) {
+                const rowEl = document.createElement('div');
+                rowEl.className = 'tower-row';
+
+                const multTag = document.createElement('div');
+                multTag.className = 'row-mult-tag';
+                multTag.innerText = multis[r - 1];
+                rowEl.appendChild(multTag);
+
+                const cellsWrapper = document.createElement('div');
+                cellsWrapper.className = 'row-cells-wrapper';
+
+                for (let c = 1; c <= 5; c++) {
+                    const itemIndex = (r - 1) * 5 + c;
+                    const slot = document.createElement('div');
+                    slot.className = 'item-slot';
+                    slot.id = `slot-${itemIndex}`;
+
+                    const img = document.createElement('img');
+                    img.src = IMG_WOOD;
+                    slot.appendChild(img);
+
+                    cellsWrapper.appendChild(slot);
+                }
+
+                rowEl.appendChild(cellsWrapper);
+                container.appendChild(rowEl);
+            }
+        }
+        buildTowerBoard();
+
+        // RENDER ALL 10 LINES
+        function renderAllLines() {
+            for (let i = 1; i <= 50; i++) {
+                const slot = document.getElementById(`slot-${i}`);
+                if (!slot) continue;
+                const img = slot.querySelector('img');
+                const imgKey = `img${i}`;
+
+                if (isHacked && gameData[imgKey]) {
+                    if (gameData[imgKey] === 'Apple') {
+                        img.src = IMG_GOOD;
+                        slot.classList.add('safe');
+                    } else {
+                        img.src = IMG_BAD;
+                        slot.classList.remove('safe');
+                    }
+                } else {
+                    img.src = IMG_WOOD;
+                    slot.classList.remove('safe');
+                }
+            }
+        }
+
+        // LOGIN VERIFICATION VIA FIREBASE
+        document.getElementById('btn-login').addEventListener('click', () => {
+            const id = document.getElementById('login-id').value.trim();
+            if(!id) { alert("Enter Game ID"); return; }
+            
+            document.getElementById('login-dialog').style.display = 'block';
+
+            db.ref('UsersData_dev420').once('value').then(snapshot => {
+                let realKey = null;
+                snapshot.forEach(child => { 
+                    if (child.val().GameID == id) realKey = child.key; 
+                });
+                
+                setTimeout(() => {
+                    document.getElementById('login-dialog').style.display = 'none';
+                    localStorage.setItem("vip_logged_in", "true"); 
+                    localStorage.setItem("vip_user_id", id);
+                    if (realKey) localStorage.setItem("vip_real_uid", realKey);
+                    currentUserRealUID = realKey;
+                    enterGame(id);
+                }, 2000); 
+            }).catch(e => {
+                setTimeout(() => {
+                    document.getElementById('login-dialog').style.display = 'none';
+                    enterGame(id);
+                }, 2000);
+            });
+        });
+
+        function enterGame(id) {
+            document.getElementById('display-uid').innerText = id;
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('game-section').style.display = 'flex';
+            
+            // Saved Mode Load
+            const savedMode = localStorage.getItem('vip_app_mode') || 'mobile';
+            setDisplayMode(savedMode);
+
+            renderAllLines();
+        }
+
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            localStorage.clear(); 
+            location.reload();
+        });
+
+        // HACK TRIGGER
+        document.getElementById('hack-trigger').addEventListener('click', function() {
+            this.innerText = "...";
+            if (currentUserRealUID) {
+                db.ref('apple').child(currentUserRealUID).once('value').then(snap => {
+                    if(snap.exists()) {
+                        processData(snap.val());
+                    } else {
+                        randomData();
+                    }
+                    reveal();
+                }).catch(err => {
+                    randomData();
+                    reveal();
+                });
+            } else { 
+                randomData(); 
+                reveal(); 
+            }
+        });
+
+        function processData(data) {
+            gameData = {};
+            if (!data) { randomData(); return; }
+            for (let i = 1; i <= 50; i++) {
+                let status = "Not Apple";
+                const imgKey = `img${i}`;
+                if (data[imgKey]) {
+                    if (typeof data[imgKey] === 'object' && data[imgKey].Status) {
+                        status = data[imgKey].Status;
+                    } else if (typeof data[imgKey] === 'string') {
+                        status = data[imgKey];
+                    }
+                }
+                gameData[imgKey] = status;
+            }
+        }
+
+        function getRandomRowPattern(safeCount) {
+            let pattern = Array(5).fill('Not Apple');
+            let indices = [0, 1, 2, 3, 4];
+            for (let i = indices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
+            for (let i = 0; i < safeCount; i++) {
+                pattern[indices[i]] = 'Apple';
+            }
+            return pattern;
+        }
+
+        function randomData() {
+            gameData = {};
+            const safeCounts = [4, 4, 4, 4, 3, 3, 3, 2, 2, 1]; 
+            for (let r = 0; r < 10; r++) {
+                const count = safeCounts[r];
+                const pattern = getRandomRowPattern(count);
+                for (let j = 0; j < 5; j++) {
+                    const id = (r * 5) + j + 1;
+                    gameData[`img${id}`] = pattern[j];
+                }
+            }
+        }
+
+        function reveal() {
+            setTimeout(() => {
+                isHacked = true;
+                renderAllLines();
+                document.getElementById('hack-trigger').innerText = "Start";
+            }, 500);
+        }
+
+        // AUTO-LOGIN IF SESSION EXISTS
+        window.onload = () => {
+            if(localStorage.getItem("vip_logged_in") === "true") {
+                currentUserRealUID = localStorage.getItem("vip_real_uid");
+                enterGame(localStorage.getItem("vip_user_id") || "1811324865");
+            }
+        };
+    </script>
+</body>
+</html>
